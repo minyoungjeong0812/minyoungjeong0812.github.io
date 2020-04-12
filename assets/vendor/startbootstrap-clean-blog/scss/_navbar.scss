@@ -2,7 +2,7 @@
 #mainNav {
   position: absolute;
   border-bottom: 1px solid $gray-200;
-  background-color: black;
+  background-color: white;
   @include sans-serif-font;
   .navbar-brand {
     font-weight: 800;
@@ -30,7 +30,7 @@
     background: transparent;
     .navbar-brand {
       padding: 10px 20px;
-      color: $black;
+      color: white;
       &:focus,
       &:hover {
         color: fade-out($white, .2);
