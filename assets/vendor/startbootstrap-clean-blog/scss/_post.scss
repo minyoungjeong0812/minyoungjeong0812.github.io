@@ -1,4 +1,12 @@
 // Styling for the post page
+body {
+  font-size: 20px;
+  color:yellow;
+  background-color:black;
+  @include serif-font;
+  
+}
+
 .post-preview {
   > a {
     color: $green;
@@ -32,6 +40,7 @@
       }
     }
   }
+  
   @media only screen and (min-width: 768px) {
     > a {
       > .post-title {

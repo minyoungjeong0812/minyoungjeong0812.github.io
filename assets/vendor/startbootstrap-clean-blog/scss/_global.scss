@@ -1,8 +1,10 @@
 // Global styling for this template
 body {
   font-size: 20px;
-  color: $gray-900;
+  color:yellow;
+  background-color:black;
   @include serif-font;
+  
 }
 
 p {
@@ -24,11 +26,11 @@ h6 {
 }
 
 a {
-  color: $gray-900;
+  color:red;
   @include transition-all;
   &:focus,
   &:hover {
-    color: $primary;
+    color: red;
   }
 }
 
@@ -55,23 +57,23 @@ blockquote {
 }
 
 ::-moz-selection {
-  color: $white;
+  color: red;
   background: $primary;
   text-shadow: none;
 }
 
 ::selection {
-  color: $white;
+  color: red;
   background: $primary;
   text-shadow: none;
 }
 
 img::selection {
-  color: $white;
+  color: red;
   background: transparent;
 }
 
 img::-moz-selection {
-  color: $white;
+  color: red;
   background: transparent;
 }
