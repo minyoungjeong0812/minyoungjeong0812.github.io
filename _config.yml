@@ -18,7 +18,7 @@ linkedin_username:  minyoung-jeong-2a66957b
 
 # Build settings
 markdown:           kramdown
-paginate:           5
+paginate:           7
 paginate_path:      "/posts/page:num/"
 plugins:
   - jekyll-feed
