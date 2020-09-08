@@ -81,21 +81,21 @@ Result table:
 | 5         | "The Hunger Games" |
 +-----------+--------------------+
 </pre>
+  <p>
+  <b> My solution <br>
+  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0>">Db-fiddle for this problem</a> <br>
   
-  <b> My solution
-  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0>">Db-fiddle for this problem</a>
-  
-select b.book_id,b.name
-from Books b left join 
+select b.book_id,b.name <br>
+from Books b left join <br>
 
-(select book_id,sum(quantity) as qu
-from Orders
-where year(dispatch_date)=2018
-group by book_id) temp
+(select book_id,sum(quantity) as qu <br>
+from Orders <br>
+where year(dispatch_date)=2018 <br>
+group by book_id) temp <br>
 
-on b.book_id=temp.book_id
-where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30
-    </b>
+on b.book_id=temp.book_id <br>
+where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30 <br>
+    </b></p>
 </body>
 
 </html>
