@@ -1,0 +1,88 @@
+---
+layout: post
+title: "SQL practice #1"
+subtitle: "Leetcode 1098.(Medium) Unpopular Books"
+categories: [SQL]
+date: 2020-09-08 20:45:13 -0400
+background:
+---
+
+<!DOCTYPE html>
+<html>
+  <head><meta charset="utf-8" /></head>
+  
+  <style>
+pre    {color: red;}
+</style>
+
+<title>SQL practice</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<body text="white">
+<p>Table: Traffic</p>
+<pre class="example">
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| user_id       | int     |
+| activity      | enum    |
+| activity_date | date    |
++---------------+---------+
+There is no primary key for this table, it may have duplicate rows.
+The activity column is an ENUM type of ('login', 'logout', 'jobs', 'groups', 'homepage').
+</pre>
+<p>Write an SQL query that reports for every date within at most 90 days from today, the number of users that logged in for the first time on that date. Assume today is 2019-06-30.</p>
+<p>The query result format is in the following example:</p>
+<pre class="example">
+Traffic table:
++---------+----------+---------------+
+| user_id | activity | activity_date |
++---------+----------+---------------+
+| 1       | login    | 2019-05-01    |
+| 1       | homepage | 2019-05-01    |
+| 1       | logout   | 2019-05-01    |
+| 2       | login    | 2019-06-21    |
+| 2       | logout   | 2019-06-21    |
+| 3       | login    | 2019-01-01    |
+| 3       | jobs     | 2019-01-01    |
+| 3       | logout   | 2019-01-01    |
+| 4       | login    | 2019-06-21    |
+| 4       | groups   | 2019-06-21    |
+| 4       | logout   | 2019-06-21    |
+| 5       | login    | 2019-03-01    |
+| 5       | logout   | 2019-03-01    |
+| 5       | login    | 2019-06-21    |
+| 5       | logout   | 2019-06-21    |
++---------+----------+---------------+
+
+Result table:
++------------+-------------+
+| login_date | user_count  |
++------------+-------------+
+| 2019-05-01 | 1           |
+| 2019-06-21 | 2           |
++------------+-------------+
+Note that we only care about dates with non zero user count.
+The user with id 5 first logged in on 2019-03-01 so he's not counted on 2019-06-21.
+</pre>
+
+  <p>
+  <b> My solution <br>
+  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0">Db-fiddle for this problem</a> <br> </b> </p>
+ <p> 
+select b.book_id,b.name <br>
+from Books b left join <br>
+
+(select book_id,sum(quantity) as qu <br>
+from Orders <br>
+where year(dispatch_date)=2018 <br>
+group by book_id) temp <br>
+
+on b.book_id=temp.book_id <br>
+where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30 <br>
+   </p>
+</body>
+
+</html>
