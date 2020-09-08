@@ -70,18 +70,17 @@ The user with id 5 first logged in on 2019-03-01 so he's not counted on 2019-06-
 
   <p>
   <b> My solution <br>
-  <a href="https://www.db-fiddle.com/f/dhKqGpqWe4bdK3qNkHHyZc/0">Db-fiddle for this problem</a> <br> </b> </p>
+  <a href="https://www.db-fiddle.com/f/dhKqGpqWe4bdK3qNkHHyZc/1">Db-fiddle for this problem</a> <br> </b> </p>
  <p> 
-select b.book_id,b.name <br>
-from Books b left join <br>
-
-(select book_id,sum(quantity) as qu <br>
-from Orders <br>
-where year(dispatch_date)=2018 <br>
-group by book_id) temp <br>
-
-on b.book_id=temp.book_id <br>
-where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30 <br>
+select temp.activity_date as login_date,count(temp.user_id) as user_count <br>
+from <br>
+(select user_id,activity_date,rank() over (partition by user_id order by activity_date) as ranking <br>
+from Traffic <br>
+where activity='login' <br>
+group by user_id,activity_date) temp <br>
+where temp.ranking=1 <br>
+group by temp.activity_date <br>
+having datediff('2019-06-30',temp.activity_date) < 90 <br>
    </p>
 </body>
 
