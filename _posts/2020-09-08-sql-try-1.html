@@ -81,6 +81,21 @@ Result table:
 | 5         | "The Hunger Games" |
 +-----------+--------------------+
 </pre>
+  
+  <b> My solution
+  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0>">Db-fiddle for this problem</a>
+  
+select b.book_id,b.name
+from Books b left join 
+
+(select book_id,sum(quantity) as qu
+from Orders
+where year(dispatch_date)=2018
+group by book_id) temp
+
+on b.book_id=temp.book_id
+where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30
+    </b>
 </body>
 
 </html>
