@@ -83,8 +83,8 @@ Result table:
 </pre>
   <p>
   <b> My solution <br>
-  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0>">Db-fiddle for this problem</a> <br>
-  
+  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0>">Db-fiddle for this problem</a> <br> </b> </p>
+ <p> 
 select b.book_id,b.name <br>
 from Books b left join <br>
 
@@ -95,7 +95,7 @@ group by book_id) temp <br>
 
 on b.book_id=temp.book_id <br>
 where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30 <br>
-    </b></p>
+   </p>
 </body>
 
 </html>
