@@ -21,13 +21,13 @@ def checker(A, B):
   <i>## immediately return True if both A and B are equal to each other ##</i>
   if A == B:
     return True
-  <br>
+
   <i>## immediately return False if the length of A and B are different ##</i>
   if len(A) != len(B):
     return False
- <br>
+
   <i>## going through a for loop to start looking from the 1st element in string B and gradually increases looking upto "X"th element (conversely looking down to "X"th element
-    in string A) and see if the sliced A and B strings are equal to each other ## </i> <br>
+    in string A) and see if the sliced A and B strings are equal to each other ## </i>
     
   for x in range(1,len(A)):
      if B[:x] == A[len(A) - x:]:
