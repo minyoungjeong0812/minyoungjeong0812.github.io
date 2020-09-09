@@ -71,7 +71,10 @@ The user with id 5 first logged in on 2019-03-01 so he's not counted on 2019-06-
   <p>
   <b> My solution <br>
   <a href="https://www.db-fiddle.com/f/dhKqGpqWe4bdK3qNkHHyZc/1">Db-fiddle for this problem</a> <br> </b> </p>
- <p> 
+
+  <p style="color:yellow;"> My idea was to rank the login date for each user and select the very 1st login date (rank=1) for each user in the subquery. </p><br>
+  
+  <p> 
 select temp.activity_date as login_date,count(temp.user_id) as user_count <br>
 from <br>
 (select user_id,activity_date,rank() over (partition by user_id order by activity_date) as ranking <br>
