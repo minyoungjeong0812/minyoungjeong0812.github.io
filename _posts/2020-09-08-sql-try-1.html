@@ -85,6 +85,9 @@ Result table:
   <b> My solution <br>
   <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0">Db-fiddle for this problem</a> <br> </b> </p>
  <p> 
+  <p style="yellow"> The key intuition was to create a 'temp' table to use for a subquery. Also, we need to use 'left join' as a certain book might have not been sold at all,
+  leaving no data in the Orders table.</p> <br>
+  
 select b.book_id,b.name <br>
 from Books b left join <br>
 
