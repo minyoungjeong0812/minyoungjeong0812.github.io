@@ -1,0 +1,21 @@
+
+def checker(A,B):
+  A_last = A[-1]
+  A_index=len(A)-1
+  
+  B_index=B.index(A_last)
+  
+  if A == B:
+    return True
+  
+  if B_index == A_index:
+    B.append(A[0])
+  
+  if B[B_index + 1] == A[0] and B[B_index - 1] == A[-2]:
+    return True
+    
+  else:
+    return False
+  
+  
+  
