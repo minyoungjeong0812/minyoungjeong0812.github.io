@@ -57,21 +57,14 @@ pre    {color: red;}
 
   <p>
   <b> My solution <br>
-  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0">Db-fiddle for this problem</a> <br> </b> </p>
+  <a href="https://www.db-fiddle.com/f/hEcsmG2twRZhDYsX1T6w9Y/1">Db-fiddle for this problem</a> <br> </b> </p>
  <p> 
-  <p style="color:yellow;"> The key intuition was to create a 'temp' table to use for a subquery. Also, we need to use 'left join' as a certain book might have not been sold at all,
-  leaving no data in the Orders table.</p>
+  <p style="color:yellow;"> I removed the date information column for both tables in my DB as it is not needed. The key thing to catch is that we need to look for distinct pairs not for one single element. </p>
   
-select b.book_id,b.name <br>
-from Books b left join <br>
-
-(select book_id,sum(quantity) as qu <br>
-from Orders <br>
-where year(dispatch_date)=2018 <br>
-group by book_id) temp <br>
-
-on b.book_id=temp.book_id <br>
-where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30 <br>
+select round((select count(distinct requesterid,accepterid) <br>
+from request_accepted) / <br>
+(select count(distinct senderid,sendtoid) <br>
+from friend_request),2) as 'accepted_rate'; <br>
    </p>
 </body>
 
