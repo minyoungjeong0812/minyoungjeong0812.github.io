@@ -1,0 +1,76 @@
+---
+layout: post
+title: "SQL practice #3"
+subtitle: "Leetcode 1098.(Medium) Unpopular Books"
+categories: [SQL]
+date: 2020-09-11 18:45:13 -0400
+background:
+---
+
+<!DOCTYPE html>
+<html>
+  <head><meta charset="utf-8" /></head>
+  
+  <style>
+pre    {color: red;}
+</style>
+
+<title>SQL practice</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<body text="white">
+
+
+<p>In social network like Facebook or Twitter, people send friend requests and accept others&#x2019; requests as well. Now given two tables as below:</p>
+<p>Table:</p>
+<p><code>friend_request</code></p>
+<pre><code>| sender_id | send_to_id |request_date|
+|-----------|------------|------------|
+| 1         | 2          | 2016_06-01 |
+| 1         | 3          | 2016_06-01 |
+| 1         | 4          | 2016_06-01 |
+| 2         | 3          | 2016_06-02 |
+| 3         | 4          | 2016-06-09 |
+</code></pre><p>Table:</p>
+<p><code>request_accepted</code></p>
+<pre><code>| requester_id | accepter_id |accept_date |
+|--------------|-------------|------------|
+| 1            | 2           | 2016_06-03 |
+| 1            | 3           | 2016-06-08 |
+| 2            | 3           | 2016-06-08 |
+| 3            | 4           | 2016-06-09 |
+| 3            | 4           | 2016-06-10 |
+</code></pre><p>Write a query to find the overall acceptance rate of requests rounded to 2 decimals, which is the number of acceptance divide the number of requests.</p>
+<p>For the sample data above, your query should return the following result.</p>
+<pre><code>|accept_rate|
+|-----------|
+|       0.80|
+</code></pre><p><strong>Note:</strong></p>
+<p>The accepted requests are not necessarily from the table <code>friend_request.</code> In this case, you just need to simply count the total accepted requests (no matter whether they are in the original requests), and divide it by the number of requests to get the acceptance rate.</p>
+<p>It is possible that a sender sends multiple requests to the same receiver, and a request could be accepted more than once. In this case, the &#x2018;duplicated&#x2019; requests or acceptances are only counted once.</p>
+<p>If there is no requests at all, you should return 0.00 as the accept_rate.</p>
+
+
+  <p>
+  <b> My solution <br>
+  <a href="https://www.db-fiddle.com/f/xiDrNQUS691JgjazsGyPut/0">Db-fiddle for this problem</a> <br> </b> </p>
+ <p> 
+  <p style="color:yellow;"> The key intuition was to create a 'temp' table to use for a subquery. Also, we need to use 'left join' as a certain book might have not been sold at all,
+  leaving no data in the Orders table.</p>
+  
+select b.book_id,b.name <br>
+from Books b left join <br>
+
+(select book_id,sum(quantity) as qu <br>
+from Orders <br>
+where year(dispatch_date)=2018 <br>
+group by book_id) temp <br>
+
+on b.book_id=temp.book_id <br>
+where ifnull(qu,0)<=10 and datediff('2019-06-23',available_from)>30 <br>
+   </p>
+</body>
+
+</html>
