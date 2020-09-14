@@ -37,3 +37,23 @@ c is at distance 1 from a and 0 from m. Hence closest key for c is m.
   </pre>
   
   <p><b>My solution:</b></p>  
+<pre>
+  mydict = {
+    'a' : ['b','c','e'],
+    'm' : ['c','e'],
+}
+
+search='c'
+
+mylist=[]
+
+<i>## iterate over dictionary values and store the index of the search word in the value list ##</i>
+for x in mydict.values():
+    mylist.append(x.index(search))
+
+<i>## Get the closest position by using 'min'##</i>
+pos=mylist.index(min(mylist))
+
+<i>## Back out the key corresponding to the closest position index ##</i>
+print(list(mydict.keys())[pos])
+  </pre>
