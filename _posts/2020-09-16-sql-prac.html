@@ -85,6 +85,15 @@ group by extra,post_id) temp <br>
 group by temp.extra; <br>
   
    </p>
+  
+    <p>
+      <b> Simpler solution : not mine <br> </b>
+      <p style="color:yellow;">I missed the action type feature.. With using the action type, one can do only one group by. </p>
+  select extra as report_reason, count(distinct post_id) as report_count
+from Actions
+where action_date = '2019-07-04' and action = 'report'
+group by extra;
+  </p>
 </body>
 
 </html>
