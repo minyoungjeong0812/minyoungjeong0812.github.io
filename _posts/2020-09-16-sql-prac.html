@@ -74,12 +74,16 @@ Result table:
   <b> My solution <br>
   <a href="https://www.db-fiddle.com/f/qWk5gjBYeTxo5a9jtuUFhc/0">Db-fiddle for this problem</a> <br> </b> </p>
  <p> 
-  <p style="color:yellow;"> The key thing to catch is that we need to look for distinct pairs not for one single element. </p>
+  <p style="color:yellow;"> The key thing to catch is that the initial group by results in two 'racist' posts with the post_id 2 and 5. 
+    So we need to perform group by on the extra feature one more time. </p>
   
-select round((select count(distinct requesterid,accepterid) <br>
-from request_accepted) / <br>
-(select count(distinct senderid,sendtoid) <br>
-from friend_request),2) as 'accepted_rate'; <br>
+select temp.extra as report_reason, count(temp.extra) as report_count <br>
+from (select extra <br>
+from Actions <br>
+where action_date = '2019-07-04' and extra != 'None' <br>
+group by extra,post_id) temp <br>
+group by temp.extra; <br>
+  
    </p>
 </body>
 
