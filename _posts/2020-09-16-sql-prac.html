@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "SQL practice #4"
-subtitle: "Leetcode 1113. eported Posts"
+subtitle: "Leetcode 1113. Reported Posts"
 categories: [SQL]
 date: 2020-09-16 09:45:13 -0400
 background:
@@ -72,9 +72,9 @@ Result table:
 
   <p>
   <b> My solution <br>
-  <a href="https://www.db-fiddle.com/f/hEcsmG2twRZhDYsX1T6w9Y/1">Db-fiddle for this problem</a> <br> </b> </p>
+  <a href="https://www.db-fiddle.com/f/qWk5gjBYeTxo5a9jtuUFhc/0">Db-fiddle for this problem</a> <br> </b> </p>
  <p> 
-  <p style="color:yellow;"> I removed the date information column for both tables in my DB as it is not needed. The key thing to catch is that we need to look for distinct pairs not for one single element. </p>
+  <p style="color:yellow;"> The key thing to catch is that we need to look for distinct pairs not for one single element. </p>
   
 select round((select count(distinct requesterid,accepterid) <br>
 from request_accepted) / <br>
