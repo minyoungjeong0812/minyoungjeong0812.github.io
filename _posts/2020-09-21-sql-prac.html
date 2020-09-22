@@ -1,0 +1,69 @@
+---
+layout: post
+title: "SQL practice #5"
+subtitle: "Leetcode 602.Friend Requests II: Who Has the Most Friends"
+categories: [SQL]
+date: 2020-09-21 20:45:13 -0400
+background:
+---
+
+<!DOCTYPE html>
+<html>
+  <head><meta charset="utf-8" /></head>
+  
+  <style>
+pre    {color: red;}
+</style>
+
+<title>SQL practice</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<body text="white">
+<p>In social network like Facebook or Twitter, people send friend requests and accept others&#8217; requests as well.<br />
+Table request_accepted holds the data of friend acceptance, while requester_id and accepter_id both are the id of a person.</p>
+<pre class="example">
+| requester_id | accepter_id | accept_date|
+|--------------|-------------|------------|
+| 1            | 2           | 2016_06-03 |
+| 1            | 3           | 2016-06-08 |
+| 2            | 3           | 2016-06-08 |
+| 3            | 4           | 2016-06-09 |
+</pre>
+<p>Write a query to find the the people who has most friends and the most friends number. For the sample data above, the result is:</p>
+<pre class="example">
+| id | num |
+|----|-----|
+| 3  | 3   |
+</pre>
+
+<p>Note:</p>
+<ul class="org-ul">
+<li>It is guaranteed there is only 1 people having the most friends.</li>
+<li>The friend request could only been accepted once, which mean there is no multiple records with the same requester_id and accepter_id value.</li>
+</ul>
+<p>Explanation:<br />
+The person with id &#8216;3&#8217; is a friend of people &#8216;1&#8217;, &#8216;2&#8217; and &#8216;4&#8217;, so he has 3 friends in total, which is the most number than any others.</p>
+ 
+ 
+ <p>
+  <b> My solution <br>
+  <a href="https://www.db-fiddle.com/f/dhKqGpqWe4bdK3qNkHHyZc/1">Db-fiddle for this problem</a> <br> </b> </p>
+
+  <p style="color:yellow;"> My idea was to rank the login date for each user and select the very 1st login date (rank=1) for each user in the subquery. </p>
+  
+  <p> 
+select temp.activity_date as login_date,count(temp.user_id) as user_count <br>
+from <br>
+(select user_id,activity_date,rank() over (partition by user_id order by activity_date) as ranking <br>
+from Traffic <br>
+where activity='login' <br>
+group by user_id,activity_date) temp <br>
+where temp.ranking=1 <br>
+group by temp.activity_date <br>
+having datediff('2019-06-30',temp.activity_date) < 90 <br>
+   </p>
+</body>
+
+</html>
