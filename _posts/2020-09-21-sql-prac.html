@@ -49,20 +49,21 @@ The person with id &#8216;3&#8217; is a friend of people &#8216;1&#8217;, &#8216
  
  <p>
   <b> My solution <br>
-  <a href="https://www.db-fiddle.com/f/dhKqGpqWe4bdK3qNkHHyZc/1">Db-fiddle for this problem</a> <br> </b> </p>
+  <a href="https://www.db-fiddle.com/f/gKWNAgnxNJsXUBLvy9pqxL/1">Db-fiddle for this problem</a> <br> </b> </p>
 
-  <p style="color:yellow;"> My idea was to rank the login date for each user and select the very 1st login date (rank=1) for each user in the subquery. </p>
+  <p style="color:yellow;"> The key intuition is to use 'union all' to merge the requester_id and accepter_id columns. </p>
   
   <p> 
-select temp.activity_date as login_date,count(temp.user_id) as user_count <br>
-from <br>
-(select user_id,activity_date,rank() over (partition by user_id order by activity_date) as ranking <br>
-from Traffic <br>
-where activity='login' <br>
-group by user_id,activity_date) temp <br>
-where temp.ranking=1 <br>
-group by temp.activity_date <br>
-having datediff('2019-06-30',temp.activity_date) < 90 <br>
+SELECT a.id, count(a.id) num <br>
+FROM <br>
+    ( <br>
+        (SELECT requester_id id FROM request_accepted) <br>
+            UNION ALL <br>
+        (SELECT accepter_id id FROM request_accepted) <br>
+    ) a <br>
+group by a.id <br>
+order by count(a.id) DESC <br>
+limit 1 <br>
    </p>
 </body>
 
