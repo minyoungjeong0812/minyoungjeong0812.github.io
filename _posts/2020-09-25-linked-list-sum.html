@@ -1,0 +1,71 @@
+class node:
+    def __init__(self,data,next=None):
+        self.data=data
+        self.next=next
+
+class linked_list:
+    def __init__(self):
+        self.head=None
+
+    def insert(self,data):
+        new_node=node(data)
+        new_node.next=self.head
+        self.head=new_node
+
+    def appending(self,data):
+        cur = self.head
+        while cur.next:
+            cur = cur.next
+        cur.next=node(data)
+
+    def printing(self):
+        cur=self.head
+        while cur.next:
+            print(cur.data)
+            cur = cur.next
+        print(cur.data)
+
+LL=linked_list()
+LL.insert(9)
+LL.appending(9)
+
+
+LL2=linked_list()
+LL2.insert(5)
+LL2.appending(2)
+
+
+def adding(LL1,LL2):
+    head_1=LL1.head
+    head_2=LL2.head
+
+    list1=[]
+    list2=[]
+
+    while head_1.next:
+        list1.append(head_1.data)
+        head_1=head_1.next
+    list1.append(head_1.data)
+
+    while head_2.next:
+        list2.append(head_2.data)
+        head_2 = head_2.next
+    list2.append(head_2.data)
+
+    int1=int(','.join([str(x) for x in list1[::-1]]).replace(',',''))
+    int2 =int(','.join([str(x) for x in list2[::-1]]).replace(',',''))
+
+    num_list=[int(d) for d in str(int1+int2)][::-1]
+
+    LL3=linked_list()
+
+    for x in range(len(num_list)):
+        if x==0:
+            LL3.insert(num_list[x])
+        else:
+            LL3.appending(num_list[x])
+
+    LL3.printing()
+
+adding(LL,LL2)
+
