@@ -18,8 +18,11 @@ color: yellow
 }
 </style>
 
+  <p>
+    There are two ways to do this. First is utilizing separate insert and append function (not leetcode-bound solution).
+  </p>
+  
   <pre id="coloryellow">
-There are two ways to do this. First is utilizing separate insert and append function (not leetcode-bound solution).
 <pre>
 class node:
     def __init__(self,data,next=None):
@@ -94,8 +97,12 @@ adding(LL,LL2)
 
   </pre>
 
- <pre id="colorred">
+<p>
 Another way is to follow Leetcode restrictions where we don't neccessarily have append and insert functions for LinkedList.
+</p>
+
+ <pre id="colorred">
+
 <pre>
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
