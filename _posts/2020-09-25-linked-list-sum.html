@@ -19,7 +19,7 @@ color: yellow
 </style>
 
   <pre id="coloryellow">
-Basic linked list structure
+There are two ways to do this. First is utilizing separate insert and append function (not leetcode-bound solution).
 <pre>
 class node:
     def __init__(self,data,next=None):
@@ -92,6 +92,44 @@ def adding(LL1,LL2):
 
 adding(LL,LL2)
 
+  </pre>
+
+ <pre id="colorred">
+Another way is to follow Leetcode restrictions where we don't neccessarily have append and insert functions for LinkedList.
+<pre>
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        
+        list1=[]
+        list2=[]
+
+        while l1.next:
+            list1.append(l1.val)
+            l1=l1.next
+        list1.append(l1.val)
+
+        while l2.next:
+            list2.append(l2.val)
+            l2 = l2.next
+        list2.append(l2.val)
+
+        int1=int(','.join([str(x) for x in list1[::-1]]).replace(',',''))
+        int2 =int(','.join([str(x) for x in list2[::-1]]).replace(',',''))
+
+        num_list=[int(d) for d in str(int1+int2)][::-1]
+        
+        cur=ListNode(1)
+        
+        l3=ListNode(num_list[0])
+        l3.next=cur
+        cur=l3
+        
+        for x in range(len(num_list)):
+            while cur.next:
+                cur=cur.next
+            cur.next=ListNode(num_list[x])
+                
+        return l3.next.next
   </pre>
 
 
